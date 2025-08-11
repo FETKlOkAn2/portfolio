@@ -233,6 +233,13 @@
             box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
         }
 
+        .hero.blur {
+        filter: blur(8px) brightness(0.6);
+        transition: filter 0.5s ease;
+        pointer-events: none; /* So that clicks don't happen on blurred area */
+        }
+
+
         /* Section titles */
         .section-title {
             font-size: 2.5rem;
@@ -399,6 +406,7 @@
             margin-bottom: 0.5rem;
             color: #6366f1;
             font-weight: 700;
+            
         }
 
         .contact p {

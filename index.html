@@ -46,58 +46,7 @@
     <section id="projects">
         <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
-            <!-- Example Project 1 -->
-            <div class="project-card">
-                <h3>E-Commerce Analytics Dashboard</h3>
-                <p>Built a comprehensive analytics dashboard for tracking sales performance, customer behavior, and
-                    inventory management using React and Python.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">PostgreSQL</span>
-                    <span class="tech-tag">D3.js</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">Live Demo</a>
-                    <a href="#" class="project-link">GitHub</a>
-                </div>
-            </div>
-
-            <!-- Example Project 2 -->
-            <div class="project-card">
-                <h3>Machine Learning Prediction Model</h3>
-                <p>Developed a predictive model for customer churn analysis using advanced ML algorithms, achieving 92%
-                    accuracy rate.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Scikit-learn</span>
-                    <span class="tech-tag">Pandas</span>
-                    <span class="tech-tag">Flask</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">Live Demo</a>
-                    <a href="#" class="project-link">GitHub</a>
-                </div>
-            </div>
-
-            <!-- Example Project 3 -->
-            <div class="project-card">
-                <h3>Real-Time Data Pipeline</h3>
-                <p>Architected and implemented a real-time data processing pipeline handling millions of events per day
-                    using Apache Kafka and Spark.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">Apache Kafka</span>
-                    <span class="tech-tag">Apache Spark</span>
-                    <span class="tech-tag">Docker</span>
-                    <span class="tech-tag">AWS</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">Case Study</a>
-                    <a href="#" class="project-link">GitHub</a>
-                </div>
-            </div>
-
-            <!-- Add more projects placeholder -->
+            <!-- Projects will be dynamically inserted here -->
             <div class="add-project-btn" onclick="openProjectModal()">
                 <span class="plus-icon">+</span>
                 <p>Add New Project</p>
@@ -269,6 +218,59 @@
             });
         });
 
+        let projects = [];
+
+        // Function to fetch projects.json and render projects
+        async function loadAndRenderProjects() {
+        try {
+            const response = await fetch('projects.json');  // Adjust path if needed
+            if (!response.ok) throw new Error('Failed to fetch projects.json');
+            projects = await response.json();
+
+            renderProjects();
+        } catch (error) {
+            console.error('Error loading projects:', error);
+        }
+        }
+
+        // Function to render projects dynamically
+        function renderProjects() {
+        const container = document.querySelector('.projects-grid');
+        const addBtn = container.querySelector('.add-project-btn');
+
+        // Remove all existing project cards before re-render
+        container.querySelectorAll('.project-card').forEach(card => card.remove());
+
+        projects.forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+
+            const techTagsHTML = project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+
+            let linksHTML = '';
+            if(project.live_demo) {
+            linksHTML += `<a href="${project.live_demo}" class="project-link" target="_blank" rel="noopener noreferrer">Live Demo</a>`;
+            }
+            if(project.github) {
+            linksHTML += `<a href="${project.github}" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>`;
+            }
+
+            card.innerHTML = `
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <div class="project-tech">${techTagsHTML}</div>
+            <div class="project-links">${linksHTML}</div>
+            `;
+
+            container.insertBefore(card, addBtn);
+        });
+        }
+
+        // Call loadAndRenderProjects on page load
+        document.addEventListener('DOMContentLoaded', () => {
+        loadAndRenderProjects();
+        });
+
         // Add project functionality
         function openProjectModal() {
             document.getElementById('projectModal').classList.add('active');
@@ -283,25 +285,41 @@
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    auth_password: document.getElementById("authPassword").value,
-                    title: document.getElementById("projectTitle").value,
-                    description: document.getElementById("projectDescription").value,
-                    tech: Array.from(document.querySelectorAll('#techTags .removable-tag'))
-                                .map(tag => tag.textContent.replace('×', '').trim()),
-                    live_demo: document.getElementById("liveDemo").value,
-                    github: document.getElementById("github").value
+                auth_password: document.getElementById("authPassword").value,
+                title: document.getElementById("projectTitle").value,
+                description: document.getElementById("projectDescription").value,
+                tech: Array.from(document.querySelectorAll('#techTags .removable-tag'))
+                            .map(tag => tag.textContent.replace('×', '').trim()),
+                live_demo: document.getElementById("liveDemo").value,
+                github: document.getElementById("github").value
                 })
             })
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    alert("✅ Project added and pushed to GitHub!");
-                    closeProjectModal();
+                alert("✅ Project added and pushed to GitHub!");
+
+                // Add new project locally
+                projects.push({
+                    title: document.getElementById("projectTitle").value,
+                    description: document.getElementById("projectDescription").value,
+                    tech: Array.from(document.querySelectorAll('#techTags .removable-tag'))
+                                .map(tag => tag.textContent.replace('×', '').trim()),
+                    live_demo: document.getElementById("liveDemo").value,
+                    github: document.getElementById("github").value,
+                    added_on: new Date().toISOString()
+                });
+
+                renderProjects();
+                closeProjectModal();
+                document.getElementById('projectForm').reset();
+                document.getElementById('techTags').innerHTML = '';
                 } else {
-                    alert("❌ Error: " + (data.error || "Unknown error"));
+                alert("❌ Error: " + (data.error || "Unknown error"));
                 }
             });
         }
+
 
         // Handle tech tags (unchanged)
         function addTech() {
@@ -336,6 +354,20 @@
                 hero.style.transform = `translateY(${scrolled * 0.5}px)`;
             }
         });
+
+        // Blur effect on hero section when modal is open
+        window.addEventListener('scroll', () => {
+        const hero = document.querySelector('.hero');
+        const scrollY = window.scrollY;
+        const heroHeight = hero.offsetHeight;
+
+        if (scrollY > heroHeight * 0.2) { // start blurring after 20% of hero scrolled
+            hero.classList.add('blur');
+        } else {
+            hero.classList.remove('blur');
+        }
+        });
+
     </script>
 </body>
 
