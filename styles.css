@@ -235,9 +235,10 @@
 
         .hero.blur {
         filter: blur(8px) brightness(0.6);
+        pointer-events: none;
         transition: filter 0.5s ease;
-        pointer-events: none; /* So that clicks don't happen on blurred area */
         }
+
 
 
         /* Section titles */

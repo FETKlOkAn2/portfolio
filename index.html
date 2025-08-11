@@ -348,25 +348,24 @@
 
         // Parallax effect for hero section
         window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-
-        // Blur effect on hero section when modal is open
-        window.addEventListener('scroll', () => {
         const hero = document.querySelector('.hero');
         const scrollY = window.scrollY;
         const heroHeight = hero.offsetHeight;
 
-        if (scrollY > heroHeight * 0.2) { // start blurring after 20% of hero scrolled
+        // Parallax offset
+        const translateY = scrollY * 0.5;
+
+        // Použijeme transform len raz, skombinujeme s prípadným ďalším transformom z triedy (ak máš)
+        hero.style.transform = `translateY(${translateY}px)`;
+
+        // Toggle blur triedy
+        if (scrollY > heroHeight * 0.2) {
             hero.classList.add('blur');
         } else {
             hero.classList.remove('blur');
         }
         });
+
 
     </script>
 </body>
