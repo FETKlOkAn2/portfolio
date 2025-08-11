@@ -274,7 +274,7 @@
         }
 
         function submitModal(){
-            fetch("https://your-backend.onrender.com/add_project", {
+            fetch("https://portfolio-backend-y1jy.onrender.com", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -317,7 +317,7 @@
         document.getElementById('projectForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const password = document.getElementById('authPassword').value;
-            const correctPassword = "mixamsamot"; // Change this to your real password
+            const correctPassword = "mixamsamot"; 
 
             if (password === correctPassword) {
                 alert('✅ Project added successfully!');
