@@ -149,7 +149,7 @@
 
                     <button type="button" class="btn-secondary" onclick="closeProjectModal()">Cancel</button>
 
-                    <button type="submit" class="btn-primary" onclick="submitModal()">Add</button>
+                    <button type="submit" class="btn-primary" >Add</button>
                 </div>
             </form>
         </div>
@@ -215,7 +215,7 @@
         <p>Ready to collaborate or discuss opportunities? I'd love to hear from you!</p>
         <div class="contact-links">
             <a href="mailto:your.email@example.com" class="contact-link">
-                📧 your.email@example.com
+                📧 tomas.maxim33@gmail.com
             </a>
             <a href="https://linkedin.com/in/yourprofile" class="contact-link">
                 💼 LinkedIn
@@ -269,7 +269,7 @@
             document.getElementById('projectModal').classList.remove('active');
         }
 
-        function submitmodal(){
+        function submitModal(){
             fetch("https://your-backend.onrender.com/add_project", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -317,7 +317,8 @@
 
             if (password === correctPassword) {
                 alert('✅ Project added successfully!');
-                closeProjectModal();
+                submitModal();
+                closeProjectModal();    
             } else {
                 alert('❌ Incorrect password!');
             }
