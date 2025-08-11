@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomáš Maxim - Developer & Data Analyst</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e5e7eb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #6366f1;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #e5e7eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: #6366f1;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 2px;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .project-card h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            color: #d1d5db;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #8b5cf6;
+        }
+
+        /* Certificates Grid */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .certificate-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .cert-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .certificate-card h3 {
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .cert-issuer {
+            color: #6366f1;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-date {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            margin: 4rem 0;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #e5e7eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #6366f1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .projects-grid,
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add project button */
+        .add-project-btn {
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px dashed rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: #6366f1;
+        }
+
+        .add-project-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .add-project-btn .plus-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="bg-particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Tomáš Maxim</h1>
+            <p class="subtitle">Developer & Data Analyst</p>
+            <p>Passionate about creating innovative solutions through code and turning data into actionable insights. Specialized in full-stack development and advanced analytics.</p>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <!-- Example Project 1 -->
+            <div class="project-card">
+                <h3>E-Commerce Analytics Dashboard</h3>
+                <p>Built a comprehensive analytics dashboard for tracking sales performance, customer behavior, and inventory management using React and Python.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">D3.js</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">Live Demo</a>
+                    <a href="#" class="project-link">GitHub</a>
+                </div>
+            </div>
+
+            <!-- Example Project 2 -->
+            <div class="project-card">
+                <h3>Machine Learning Prediction Model</h3>
+                <p>Developed a predictive model for customer churn analysis using advanced ML algorithms, achieving 92% accuracy rate.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Flask</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">Live Demo</a>
+                    <a href="#" class="project-link">GitHub</a>
+                </div>
+            </div>
+
+            <!-- Example Project 3 -->
+            <div class="project-card">
+                <h3>Real-Time Data Pipeline</h3>
+                <p>Architected and implemented a real-time data processing pipeline handling millions of events per day using Apache Kafka and Spark.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Apache Kafka</span>
+                    <span class="tech-tag">Apache Spark</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">AWS</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">Case Study</a>
+                    <a href="#" class="project-link">GitHub</a>
+                </div>
+            </div>
+
+            <!-- Add more projects placeholder -->
+            <div class="add-project-btn">
+                <span class="plus-icon">+</span>
+                <p>Add New Project</p>
+                <small>Click to add your next amazing project</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates">
+        <h2 class="section-title">Certificates & Achievements</h2>
+        <div class="certificates-grid">
+            <!-- Example Certificate 1 -->
+            <div class="certificate-card">
+                <div class="cert-icon">🏆</div>
+                <h3>AWS Certified Solutions Architect</h3>
+                <p class="cert-issuer">Amazon Web Services</p>
+                <p class="cert-date">Issued: January 2024</p>
+            </div>
+
+            <!-- Example Certificate 2 -->
+            <div class="certificate-card">
+                <div class="cert-icon">📊</div>
+                <h3>Google Data Analytics Professional</h3>
+                <p class="cert-issuer">Google</p>
+                <p class="cert-date">Issued: March 2024</p>
+            </div>
+
+            <!-- Example Certificate 3 -->
+            <div class="certificate-card">
+                <div class="cert-icon">🐍</div>
+                <h3>Python for Data Science</h3>
+                <p class="cert-issuer">IBM</p>
+                <p class="cert-date">Issued: November 2023</p>
+            </div>
+
+            <!-- Example Certificate 4 -->
+            <div class="certificate-card">
+                <div class="cert-icon">⚛️</div>
+                <h3>React Developer Certification</h3>
+                <p class="cert-issuer">Meta</p>
+                <p class="cert-date">Issued: February 2024</p>
+            </div>
+
+            <!-- Example Certificate 5 -->
+            <div class="certificate-card">
+                <div class="cert-icon">📈</div>
+                <h3>Machine Learning Specialization</h3>
+                <p class="cert-issuer">Stanford University</p>
+                <p class="cert-date">Issued: December 2023</p>
+            </div>
+
+            <!-- Example Certificate 6 -->
+            <div class="certificate-card">
+                <div class="cert-icon">☁️</div>
+                <h3>Microsoft Azure Fundamentals</h3>
+                <p class="cert-issuer">Microsoft</p>
+                <p class="cert-date">Issued: October 2023</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p>Ready to collaborate or discuss opportunities? I'd love to hear from you!</p>
+        <div class="contact-links">
+            <a href="mailto:your.email@example.com" class="contact-link">
+                📧 your.email@example.com
+            </a>
+            <a href="https://linkedin.com/in/yourprofile" class="contact-link">
+                💼 LinkedIn
+            </a>
+            <a href="https://github.com/yourusername" class="contact-link">
+                💻 GitHub
+            </a>
+            <a href="tel:+1234567890" class="contact-link">
+                📱 +1 (234) 567-890
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Create animated background particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numberOfParticles = 50;
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add project functionality
+        document.querySelector('.add-project-btn').addEventListener('click', function() {
+            alert('Ready to add a new project! You can replace this alert with a form or modal to add new project details.');
+        });
+
+        // Initialize particles when page loads
+        document.addEventListener('DOMContentLoaded', createParticles);
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
