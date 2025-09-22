@@ -1,12 +1,29 @@
 [
   {
-    "title": "test",
-    "description": "test",
+    "title": "CryptoBot",
+    "description": "An automated cryptocurrency trading bot designed to analyze market trends, execute trades, and optimize strategies using real-time data and advanced indicators. It supports multiple exchanges and includes risk management features. So far 10% per 6 months",
     "tech": [
-      "test"
+      "Python",
+      "Pandas",
+      "numpy",
+      "cupy",
+      "WebSockets",
+      "Machine Learning"
     ],
     "live_demo": "",
-    "github": "",
+    "added_on": "2025-08-11T17:11:07.089148"
+  },
+  {
+    "title": "Parts Scraper – Image Analyzer",
+    "description": "A production-grade scraper that collects part numbers from supplier websites and automatically retrieves and analyzes official product images. Developed as an internal tool for a U.S. company, capable of handling thousands of parts efficiently.",
+    "tech": [
+      "Python",
+      "BeautifulSoup",
+      "Selenium",
+      "OpenCV",
+      "AWS S3"
+    ],
+    "live_demo": "",
     "added_on": "2025-08-11T17:11:07.089148"
   }
 ]
