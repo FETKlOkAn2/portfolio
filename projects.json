@@ -25,5 +25,18 @@
     ],
     "live_demo": "",
     "added_on": "2025-08-11T17:11:07.089148"
+  },
+  {
+    "title": "Face Recognition App",
+    "description": "Intelligent React application utilizing Clarifai AI API for automatic face detection and highlighting in images, featuring complete authentication system and user activity tracking. Demonstrates integration of machine learning services with real-time visualization and modern UI including animated particles background.",
+    "tech": [
+      "React.js",
+      "Clarifai API",
+      "RESTful API",
+      "CSS3",
+      "Particles.js"
+    ],
+    "live_demo": "",
+    "added_on": "2025-10-24T10:30:00.000000"
   }
 ]
