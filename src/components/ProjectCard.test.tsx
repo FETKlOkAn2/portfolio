@@ -62,6 +62,16 @@ describe('ProjectCard', () => {
     expect(screen.queryByText('Private repo')).not.toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Source' })).toBeInTheDocument()
   })
+
+  it('drops a link whose URL is not http or https', () => {
+    const project = makeProject({
+      links: [{ kind: 'live', label: 'Bad link', url: 'javascript:alert(1)' }],
+    })
+    render(<ProjectCard project={project} />)
+
+    expect(screen.queryByText('Bad link')).not.toBeInTheDocument()
+    expect(screen.queryByRole('link')).not.toBeInTheDocument()
+  })
 })
 
 describe('ProjectGrid', () => {

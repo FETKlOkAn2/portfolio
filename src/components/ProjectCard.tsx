@@ -1,5 +1,6 @@
 import { ArrowUpRight, FileText, Lock } from 'lucide-react'
 import { ProjectView } from '../domain/ProjectView'
+import { isHttpUrl } from '../domain/safeUrl'
 import type { Project, ProjectLink } from '../domain/types'
 import { BrandIcon } from './BrandIcon'
 import { FlowLine } from './FlowLine'
@@ -17,6 +18,7 @@ function LinkIcon({ link }: { link: ProjectLink }) {
 
 export function ProjectCard({ project }: { project: Project }) {
   const view = new ProjectView(project)
+  const links = project.links.filter((link) => isHttpUrl(link.url))
 
   return (
     <article className={styles.card} data-featured={project.featured}>
@@ -47,9 +49,9 @@ export function ProjectCard({ project }: { project: Project }) {
         ))}
       </ul>
 
-      {(project.links.length > 0 || view.showsPrivateNote) && (
+      {(links.length > 0 || view.showsPrivateNote) && (
         <footer className={styles.links}>
-          {project.links.map((link) => (
+          {links.map((link) => (
             <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
               <LinkIcon link={link} />
               {link.label}
