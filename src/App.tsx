@@ -1,7 +1,5 @@
+import { Site } from './Site'
+
 export function App() {
-  return (
-    <main>
-      <h1>Tomáš Maxim</h1>
-    </main>
-  )
+  return <Site />
 }
