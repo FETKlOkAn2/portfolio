@@ -2126,7 +2126,7 @@ api_router.include_router(
 - [ ] **Step 5: Run the tests**
 
 Run: `uv run pytest -q`
-Expected: `72 passed`.
+Expected: `71 passed`.
 
 If `test_writes_require_a_token` returns `422` for a route, the auth dependency ran after body validation. Confirm `dependencies=admin_only` sits on the route decorator, as written above.
 
@@ -2529,7 +2529,7 @@ if __name__ == "__main__":
 - [ ] **Step 6: Run the tests**
 
 Run: `uv run pytest -q`
-Expected: `79 passed`.
+Expected: `78 passed`.
 
 - [ ] **Step 7: Commit**
 
@@ -2617,7 +2617,7 @@ Expected, in order: `{"status":"ok"}`, then a 16-character version followed by `
 - [ ] **Step 6: Run the whole suite and commit**
 
 Run: `uv run pytest -q`
-Expected: `79 passed`.
+Expected: `78 passed`.
 
 ```bash
 git add -A
@@ -2738,7 +2738,7 @@ Render runs `render.yaml`. Set `DATABASE_URL` (Neon Postgres), `JWT_SECRET` and
 - [ ] **Step 4: Run the suite one last time and commit**
 
 Run: `uv run pytest -q`
-Expected: `79 passed`.
+Expected: `78 passed`.
 
 ```bash
 git add -A
