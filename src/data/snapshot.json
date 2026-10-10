@@ -1,0 +1,383 @@
+{
+  "version": "3c130462b8ee359c",
+  "projects": [
+    {
+      "slug": "aptum",
+      "title": "Aptum",
+      "tagline": "Skill-based marketplace prototype where the best puzzle score wins the item.",
+      "description": "Entrants pay a small fee to join a capacity-capped queue. Once the queue fills, they play the same deterministic puzzle round and the top score wins the item. I built the prototype to prove the money path first: the platform charges nobody unless the queue fills, chance plays no part in the result, and every movement of funds balances. The sandbox runs on test payments, with no real money.",
+      "highlights": [
+        "Redis Lua admits entrants atomically, so a queue cannot exceed its capacity",
+        "PostgreSQL triggers enforce a double-entry, append-only ledger",
+        "Seeded puzzle generation, commit-reveal and server-side scoring make each round replayable"
+      ],
+      "tech": [
+        "Python 3.12",
+        "FastAPI",
+        "SQLAlchemy 2.0",
+        "PostgreSQL",
+        "Redis",
+        "WebSockets",
+        "React",
+        "TypeScript"
+      ],
+      "flow": [
+        "list item",
+        "queue fills",
+        "capture payments",
+        "play round",
+        "score",
+        "ship",
+        "release escrow"
+      ],
+      "links": [
+        {
+          "kind": "live",
+          "label": "Open sandbox",
+          "url": "https://sandbox-aptum.com/practice"
+        }
+      ],
+      "status": "prototype",
+      "category": "platform",
+      "repoVisibility": "private",
+      "featured": true,
+      "sortOrder": 10,
+      "id": 1
+    },
+    {
+      "slug": "crypto-quant-platform",
+      "title": "Crypto Quant Platform",
+      "tagline": "Backtesting and walk-forward validation, built to tell you when a strategy does not work.",
+      "description": "A self-hosted platform for testing crypto strategies and running the ones that survive. It backtests with vectorbt, validates walk-forward with a purge gap, simulates paper trading with an order book, fees and slippage, and executes live on Kraken with position reconciliation. An MCP server lets an AI agent run the research loop in plain English.",
+      "highlights": [
+        "Deflated Sharpe scores the luckiest of 200 zero-edge strategies at 43.7% and rejects it; a conventional test accepts it at 99.5%",
+        "18 reference strategies ship as plug-ins; a new one subclasses Strategy",
+        "The MCP server is paper-only: no tool can place a real order"
+      ],
+      "tech": [
+        "Python 3.10",
+        "vectorbt",
+        "Flask",
+        "WebSockets",
+        "MCP",
+        "Docker"
+      ],
+      "flow": [
+        "backtest",
+        "walk-forward",
+        "deflated Sharpe",
+        "paper trade",
+        "reconcile"
+      ],
+      "links": [
+        {
+          "kind": "repo",
+          "label": "Source",
+          "url": "https://github.com/FETKlOkAn2/crypto-quant-platform"
+        }
+      ],
+      "status": "released",
+      "category": "platform",
+      "repoVisibility": "public",
+      "featured": false,
+      "sortOrder": 20,
+      "id": 2
+    },
+    {
+      "slug": "book-pipeline",
+      "title": "Book Pipeline",
+      "tagline": "A team of small agents that drafts, critiques and fact-checks a novel section by section.",
+      "description": "You create a book from a title, premise, genre and tone. The pipeline seeds an outline, then for each section it writes a draft, critiques it, revises where the critic objects, and extracts the new facts into a per-book canon that later sections read from. Generation runs as background jobs behind a FastAPI service with a Next.js app on top.",
+      "highlights": [
+        "Each section carries a contract: must establish, may assume, forbidden",
+        "The writer agent queries the canon over MCP on demand",
+        "Haiku drafts, Sonnet critiques, Opus proposes; a cost report estimates the run before and prints a receipt after"
+      ],
+      "tech": [
+        "Python 3.13",
+        "FastAPI",
+        "SQLAlchemy",
+        "Alembic",
+        "Next.js 15",
+        "TypeScript",
+        "Claude API",
+        "MCP"
+      ],
+      "flow": [
+        "outline",
+        "draft",
+        "critique",
+        "revise",
+        "extract canon",
+        "coherence pass"
+      ],
+      "links": [],
+      "status": "prototype",
+      "category": "agents",
+      "repoVisibility": "private",
+      "featured": false,
+      "sortOrder": 30,
+      "id": 3
+    },
+    {
+      "slug": "betbrain",
+      "title": "BetBrain",
+      "tagline": "Football match intelligence pipeline that writes sourced match reports with model probabilities.",
+      "description": "An MVP for five European competitions. The pipeline ingests news and data, extracts entities, scores each item for relevance, and runs a Dixon-Coles model for match probabilities. An LLM then writes the match report, and a citation validator sends the draft back for another attempt when a citation fails. The product surfaces analysis and probability estimates; the user decides.",
+      "highlights": [
+        "The pipeline runs end to end for five leagues; source credibility and outcome learning remain stubs",
+        "Claude Haiku extracts entities at scale, Claude Sonnet writes the report",
+        "78 tests, with full coverage on scoring, synthesis and API routes"
+      ],
+      "tech": [
+        "Python 3.13",
+        "FastAPI",
+        "PostgreSQL",
+        "TimescaleDB",
+        "Redis",
+        "Claude API"
+      ],
+      "flow": [
+        "ingest",
+        "extract entities",
+        "score relevance",
+        "model probabilities",
+        "synthesise",
+        "validate citations",
+        "detect value"
+      ],
+      "links": [],
+      "status": "in-progress",
+      "category": "agents",
+      "repoVisibility": "private",
+      "featured": false,
+      "sortOrder": 40,
+      "id": 4
+    },
+    {
+      "slug": "website-audit-agent",
+      "title": "Website Audit Agent",
+      "tagline": "Outreach engine that audits a business's website and writes the email from what it found.",
+      "description": "The agent finds local businesses with weak websites through OpenStreetMap, qualifies them with free heuristics and a cheap model, and audits each site for conversion and design problems. A premium model writes an email that cites the findings. Grounding, tone and screenshot checks gate each email before it sends, and the agent watches the inbox for replies and posts them to Discord.",
+      "highlights": [
+        "Tiered Claude models control cost: a cheap model qualifies leads, the premium model writes",
+        "About 40 modules and 450+ unit tests that run offline",
+        "Three GitHub Actions workflows schedule the runs"
+      ],
+      "tech": [
+        "Python 3.11",
+        "Claude API",
+        "OpenStreetMap Overpass",
+        "PageSpeed API",
+        "SMTP / IMAP",
+        "GitHub Actions"
+      ],
+      "flow": [
+        "discover",
+        "qualify",
+        "audit",
+        "write",
+        "quality gates",
+        "send",
+        "monitor replies"
+      ],
+      "links": [
+        {
+          "kind": "repo",
+          "label": "Source",
+          "url": "https://github.com/FETKlOkAn2/WebsiteAuditAgent"
+        }
+      ],
+      "status": "released",
+      "category": "agents",
+      "repoVisibility": "public",
+      "featured": false,
+      "sortOrder": 50,
+      "id": 5
+    },
+    {
+      "slug": "image-analyzer",
+      "title": "Image Analyzer",
+      "tagline": "Filters, deduplicates and clusters product images before they reach a catalogue.",
+      "description": "For each part number the pipeline downloads up to 20 candidate images, drops watermarked ones with OCR and alpha-channel checks, groups near-duplicates by perceptual hash, and ranks the survivors by structural similarity and background whiteness. The top five go to the catalogue. It grew out of contract work for a U.S. company on a catalogue of more than 100,000 product images.",
+      "highlights": [
+        "pHash fingerprints, clustered with DBSCAN on Hamming distance",
+        "SSIM ranking and a white-background check pick the top five per part"
+      ],
+      "tech": [
+        "Python",
+        "OpenCV",
+        "scikit-image",
+        "scikit-learn",
+        "imagehash",
+        "Tesseract OCR",
+        "AWS S3"
+      ],
+      "flow": [
+        "download",
+        "watermark check",
+        "pHash",
+        "DBSCAN cluster",
+        "SSIM rank",
+        "top 5"
+      ],
+      "links": [
+        {
+          "kind": "repo",
+          "label": "Source",
+          "url": "https://github.com/FETKlOkAn2/Image-Analyzer"
+        }
+      ],
+      "status": "prototype",
+      "category": "data",
+      "repoVisibility": "public",
+      "featured": false,
+      "sortOrder": 60,
+      "id": 6
+    },
+    {
+      "slug": "face-recognition-app",
+      "title": "Face Recognition App",
+      "tagline": "React app that detects and outlines faces in an image.",
+      "description": "The app sends an image to the Clarifai API and draws a box around each face it returns. Users register and sign in, and the app counts each user's submissions. Final project of the Zero To Mastery full-stack course.",
+      "highlights": [],
+      "tech": [
+        "React",
+        "Clarifai API",
+        "REST API",
+        "CSS"
+      ],
+      "flow": [],
+      "links": [
+        {
+          "kind": "repo",
+          "label": "Source",
+          "url": "https://github.com/FETKlOkAn2/face-recognition-brain"
+        }
+      ],
+      "status": "archived",
+      "category": "web",
+      "repoVisibility": "public",
+      "featured": false,
+      "sortOrder": 70,
+      "id": 7
+    }
+  ],
+  "experience": [
+    {
+      "role": "Software Engineer",
+      "company": "Iron Mountain",
+      "employmentType": "Full-time",
+      "location": "Bratislava, Slovakia · Remote",
+      "startDate": "2026-07-01",
+      "endDate": null,
+      "summary": "",
+      "skills": [],
+      "id": 1
+    },
+    {
+      "role": "Python Developer",
+      "company": "Veach Solutions",
+      "employmentType": "Contract",
+      "location": "Texas, United States · Remote",
+      "startDate": "2025-09-01",
+      "endDate": "2026-01-01",
+      "summary": "Designed and implemented a computer vision pipeline for automated image similarity detection and quality control across 100,000+ product images.",
+      "skills": [
+        "Python",
+        "Computer vision",
+        "Perceptual hashing"
+      ],
+      "id": 2
+    },
+    {
+      "role": "RITR Project Participant",
+      "company": "Unicorn",
+      "employmentType": "Internship",
+      "location": "Slovakia · Remote",
+      "startDate": "2024-12-01",
+      "endDate": "2025-03-01",
+      "summary": "Worked on a cryptocurrency trading bot web application as part of a collaborative development environment.",
+      "skills": [
+        "APIs",
+        "System design"
+      ],
+      "id": 3
+    },
+    {
+      "role": "Tester",
+      "company": "WABCO",
+      "employmentType": null,
+      "location": null,
+      "startDate": "2024-07-01",
+      "endDate": "2024-09-01",
+      "summary": "Worked in an Agile team ensuring reliability of internal systems. Designed and executed test cases, reported defects, and joined sprint reviews.",
+      "skills": [],
+      "id": 4
+    }
+  ],
+  "certificates": [
+    {
+      "title": "Python Developer Certificate",
+      "issuer": "Zero To Mastery",
+      "issuedLabel": "Sep 2025",
+      "sortOrder": 10,
+      "id": 1
+    },
+    {
+      "title": "Full Stack Developer Certificate",
+      "issuer": "Zero To Mastery",
+      "issuedLabel": "Aug 2025",
+      "sortOrder": 20,
+      "id": 2
+    },
+    {
+      "title": "Cisco Certified Network Associate (CCNA 3)",
+      "issuer": "Cisco",
+      "issuedLabel": "2025",
+      "sortOrder": 30,
+      "id": 3
+    },
+    {
+      "title": "Cisco Certified Network Associate (CCNA 2)",
+      "issuer": "Cisco",
+      "issuedLabel": "2025",
+      "sortOrder": 40,
+      "id": 4
+    },
+    {
+      "title": "Data Analytics Certificate",
+      "issuer": "Codecademy",
+      "issuedLabel": "2025",
+      "sortOrder": 50,
+      "id": 5
+    },
+    {
+      "title": "Cisco Certified Network Associate (CCNA 1)",
+      "issuer": "Cisco",
+      "issuedLabel": "2023",
+      "sortOrder": 60,
+      "id": 6
+    }
+  ],
+  "articles": [
+    {
+      "title": "From Spreadsheets to Insights: A Real-World Data Science Journey",
+      "publication": "Medium",
+      "topic": "Data Science",
+      "summary": "How I modernised reporting workflows, automated insight generation and turned messy spreadsheet data into decisions.",
+      "url": "https://medium.com/@tomas.maxim33/from-spreadsheets-to-insights-a-real-world-data-science-journey-b381bca3cced",
+      "sortOrder": 10,
+      "id": 1
+    },
+    {
+      "title": "How I Built My First Crypto Trading Bot (and What I Learned)",
+      "publication": "Medium",
+      "topic": "Engineering",
+      "summary": "An end-to-end breakdown of a Python crypto bot, from market data pipelines to risk controls.",
+      "url": "https://medium.com/@tomas.maxim33/how-i-built-my-first-crypto-trading-bot-and-what-i-learned-fd95f368f1d7",
+      "sortOrder": 20,
+      "id": 2
+    }
+  ]
+}
