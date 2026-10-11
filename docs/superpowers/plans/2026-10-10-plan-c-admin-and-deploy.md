@@ -379,7 +379,7 @@ export const authSession = new AuthSession(window.sessionStorage)
 - [ ] **Step 7: Run the tests**
 
 Run: `npm test && npm run typecheck`
-Expected: `71 passed`, no type errors.
+Expected: `80 passed`, no type errors.
 
 - [ ] **Step 8: Commit**
 
@@ -1280,7 +1280,7 @@ export function App() {
 npm test && npm run typecheck && npm run build
 ```
 
-Expected: `78 passed`, no type errors. The build output lists a separate `AdminApp-<hash>.js` chunk next to `index-<hash>.js`.
+Expected: `87 passed`, no type errors. The build output lists a separate `AdminApp-<hash>.js` chunk next to `index-<hash>.js`.
 
 - [ ] **Step 11: Try it against the local API**
 
@@ -1450,7 +1450,7 @@ node -e "for (const f of ['ci','deploy']) { const t = require('fs').readFileSync
 npm test && npm run typecheck && npm run build
 ```
 
-Expected: `ci ok` and `deploy ok`, `78 passed`, a clean build.
+Expected: `ci ok` and `deploy ok`, `87 passed`, a clean build.
 
 - [ ] **Step 5: Commit**
 
