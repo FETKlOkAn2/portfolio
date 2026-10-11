@@ -1,0 +1,40 @@
+.list {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.meta {
+  margin-bottom: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.title a {
+  color: var(--text);
+  transition: color 150ms;
+}
+
+.title a:hover {
+  color: var(--accent-text);
+  text-decoration: none;
+}
+
+.icon {
+  display: inline;
+  margin-left: 0.3rem;
+  vertical-align: -2px;
+  color: var(--accent-text);
+}
+
+.summary {
+  max-width: 65ch;
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+}

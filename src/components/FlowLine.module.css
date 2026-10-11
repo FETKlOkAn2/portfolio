@@ -1,0 +1,24 @@
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  padding: 0.6rem 0.75rem;
+  color: var(--text);
+  font-size: 0.78125rem;
+  background: var(--accent-wash);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.flow li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.arrow {
+  flex: none;
+  color: var(--accent);
+}

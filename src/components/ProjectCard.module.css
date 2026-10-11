@@ -1,0 +1,134 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 150ms;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+}
+
+.card[data-featured='true'] {
+  grid-column: 1 / -1;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.category {
+  color: var(--accent-text);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+}
+
+.status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+}
+
+/* The one colour outside the tokens: a released project gets a green dot. */
+.status[data-status='released']::before {
+  background: #4ade80;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  color: var(--text);
+}
+
+.description {
+  max-width: 65ch;
+  color: var(--text-muted);
+}
+
+.highlights {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.card[data-featured='true'] .highlights {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  column-gap: 2rem;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.highlights li::before {
+  content: '';
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  width: 6px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.tech li {
+  padding: 0.15rem 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  padding-top: 0.75rem;
+  font-size: 0.9375rem;
+  border-top: 1px solid var(--border);
+}
+
+.links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 32px;
+}
+
+.private {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+}
